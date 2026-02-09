@@ -6,16 +6,26 @@ window.title("Notepad")
 window.geometry("400x400")
 window.resizable(False, False)
 
-menu = Menu(window) # 최상위 메뉴
-menu_1 = Menu(menu, tearoff=0) # 하위 메뉴
+menu = Menu(window)
+menu_1 = Menu(menu, tearoff=0)
 menu_1.add_command(label="새파일")
 menu_1.add_command(label="저장")
-menu_1.add_separator() # 구분선
+menu_1.add_separator()
 menu_1.add_command(label="종료", command=window.destroy)
 menu.add_cascade(label="파일", menu=menu_1)
+
 menu_2 = Menu(menu, tearoff=0)
 menu_2.add_command(label="만든이")
 menu.add_cascade(label="만든이", menu=menu_2)
 
-window.config(menu=menu) # 메뉴를 창에다 추가한다!
+text_area = Text(window) # 텍스트 입력창 
+
+# 첫번째 행과 첫번째 열에 가중치를 몰빵한 후
+window.grid_rowconfigure(0, weight=1)
+window.grid_columnconfigure(0, weight=1)
+
+# 텍스트 입력창으로 가득 채운다!
+text_area.grid(sticky = N + E + S + W)
+
+window.config(menu=menu)
 window.mainloop()
